@@ -1,11 +1,35 @@
+use std::io;
 fn main() {
-    let loan_amt: f64=13810.0;
-    let interest_rate: f64=8.12;
-    let r=interest_rate/12.0/100.0;
-    let time_period: f64=10.0*12.0;
+    //Loan Amt
+    println!("Enter the Loan Amount");
+    let mut loan_amt = String::new();
+    io::stdin()
+    .read_line(&mut loan_amt).unwrap();
+    let loan_amt: f64=loan_amt.trim().parse().unwrap(); 
+    
+    //Interest Rate
+    println!("Enter the Rate of interest");
+    let mut rate_interest = String::new();
+    io::stdin()
+    .read_line(&mut rate_interest).unwrap();
+    let rate_interest: f64=rate_interest.trim().parse().unwrap();
 
-    let emi: f64=(loan_amt*r*(1.0+ r)
-    .powf(time_period))/((1.0+r)
-    .powf(time_period)-1.0);
+    let r: f64 =(rate_interest)/1200.0;
+
+    //Time Period
+    println!("Enter the Time period");
+    let mut n=String::new();
+    io::stdin()
+    .read_line(&mut n).unwrap();
+    let n: f64 =n.trim().parse().unwrap(); 
+
+
+    println!("Loan Amount {loan_amt}");
+    println!("Time period {n}");
+    println!("Monthly Rate of Interest {r}");
+
+    //Emi Calculation
+    let emi=(loan_amt*r*(1.0+r).powf(n))/((1.0+r).powf(n)-1.0);
     println!("{}",emi);
+
 }
